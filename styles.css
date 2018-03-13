@@ -3,12 +3,9 @@ body {
     color: #3b3a36;
 }
 
-.row {margin-bottom: 0;}
-
-#map {
-    height: 50vh;
-    background-color: #e1e8f0;
-  }
+.row {
+    margin-bottom: 0;
+}
 
 .btn {
     background-color: #3b3a36;
@@ -19,6 +16,12 @@ body {
 
 .btn:hover {
     background-color: #575757;
+    text-transform: lowercase;
+    color: #e1e8f0;
+}
+
+.btn:focus {
+    background-color: #3b3a36;
     text-transform: lowercase;
     color: #e1e8f0;
 }
@@ -36,4 +39,17 @@ body {
     font-size: 1.2em;
     margin-right: .2em;
 }
+#map {
+    height: 55vh;
+    background-color: #e1e8f0;
+  }
+
+#steps {
+    height: 55vh;
+    overflow: scroll;
+    border: 1px dotted #3b3a36;
+  
+}
+
+#steps .flow-text { margin-top: .5em;}
     

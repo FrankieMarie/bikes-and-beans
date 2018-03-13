@@ -22,6 +22,9 @@ submit.addEventListener('click', ()=> {
     calcRoute();
 });
 
+//grabbing directions (steps) div
+let directions = document.getElementById('steps')
+
 // directions
 function calcRoute() {
     var start = document.getElementById('start').value;
@@ -32,7 +35,11 @@ function calcRoute() {
       travelMode: 'BICYCLING'
     };
     directionsService.route(request, function(result, status) {
-        console.log(result)
+        let steps = result.routes[0].legs[0].steps
+        for(let i=0; i<steps.length; i++){
+            console.log(steps[i].instructions)
+            directions.innerHTML += [i+1] + ')' + ' ' + steps[i].instructions + `</br>`
+        } 
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }

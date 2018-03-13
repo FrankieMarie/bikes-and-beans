@@ -15,7 +15,12 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" defer></script>
 </head>
+
 <body>
+
+    <div class="container row">
+        <h1 class="flow-text center">Bikes & Beans</h1>
+    </div>
 
     <div class="row container">
       <form class="col s12">
@@ -39,10 +44,17 @@
         <p class="col s4"><i class="material-icons">build</i>Bike shops:</p>
     </div>
 
-    <div class="container" id="map"></div>
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRsNqTWa_LGItM_AB_-ot8AITH-Eh_TDw&callback=initMap">
-        </script>
+    <div class="container row">
+        <div class="col s8" id="map"></div>
+        <div class="col s4" id="steps">
+            <h1 class="flow-text">Directions</h1>
+        </div>
+    </div>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRsNqTWa_LGItM_AB_-ot8AITH-Eh_TDw&callback=initMap"></script>
+
     <script src="script.js" defer></script>
+
 </body>
+
 </html>
