@@ -23,14 +23,21 @@ body {
 
 .btn:focus {background-color: #c8ef78;}
 
-  i.material-icons {
+#miles, #coffee, #shop {
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+i.material-icons {
     font-size: 1.2em;
     margin-right: .2em;
 }
+
 #map {
     height: 55vh;
     background-color: #e1e8f0;
-  }
+}
 
 #steps {
     height: 55vh;
