@@ -26,6 +26,10 @@ submit.addEventListener('click', ()=> {
 let directions = document.getElementById('steps')
 
 // directions
+let miles = document.getElementById('miles')
+let coffee = document.getElementById('coffee')
+let shop = document.getElementById('shop')
+
 function calcRoute() {
     var start = document.getElementById('start').value;
     var destination = document.getElementById('destination').value;
@@ -37,9 +41,10 @@ function calcRoute() {
     directionsService.route(request, function(result, status) {
         let steps = result.routes[0].legs[0].steps
         for(let i=0; i<steps.length; i++){
-            console.log(steps[i].instructions)
             directions.innerHTML += [i+1] + ')' + ' ' + steps[i].instructions + `</br>`
         } 
+      let distance = result.routes[0].legs[0].distance.text
+      miles.innerHTML += ' ' + distance
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }

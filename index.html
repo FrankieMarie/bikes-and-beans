@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bike and Beans</title>
+    <title>Bikes & Beans</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,8 +18,8 @@
 
 <body>
 
-    <div class="container row">
-        <h1 class="flow-text center">Bikes & Beans</h1>
+    <div class="container row" id="logo">
+        <img class="responsive-img col s4 offset-s4" src="./images/BBlogo.png">
     </div>
 
     <div class="row container">
@@ -27,11 +27,11 @@
           <div class="row">
             <div class="input-field col s6">             
               <input id="start" type="text">
-              <label for="start">Starting Point</label>
+              <label for="start">Starting Point:</label>
             </div>
             <div class="input-field col s6">
               <input id="destination" type="text">
-              <label for="destination">Destination</label>
+              <label for="destination">Destination:</label>
             </div>
           </div>
       </form>
@@ -39,15 +39,15 @@
     </div>
 
     <div class="row container">
-        <p class="col s4"><i class="material-icons">directions_bike</i>Total miles:</p>
-        <p class="col s4"><i class="material-icons">local_cafe</i>Cafés:</p>
-        <p class="col s4"><i class="material-icons">build</i>Bike shops:</p>
+        <p class="col s4" id="miles"><i class="material-icons">directions_bike</i>Total miles:</p>
+        <p class="col s4"><i class="material-icons">local_cafe</i>Cafés:<div id="coffee"></div></p>
+        <p class="col s4"><i class="material-icons">build</i>Bike shops:<div id="shop"></div></p>
     </div>
 
     <div class="container row">
         <div class="col s8" id="map"></div>
         <div class="col s4" id="steps">
-            <h1 class="flow-text">Directions</h1>
+            <h1 class="flow-text">Directions:</h1>
         </div>
     </div>
 
