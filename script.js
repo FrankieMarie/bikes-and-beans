@@ -7,43 +7,21 @@ function initMap() {
       draggable: true,
       map: map
     });
-    var uluru = {lat: 33.4484, lng: -112.0740};
+    var phoenix = {lat: 33.4484, lng: -112.0740};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
-      center: uluru
+      center: phoenix
     });
     var marker = new google.maps.Marker({
-      position: uluru,
+      position: phoenix,
       map: map
     }); 
+    directionsDisplay.addListener('directions_changed', function() {
+      computeTotalDistance(directionsDisplay.getDirections());
+    });
     directionsDisplay.setMap(map);  
- 
-//locating cafés
-    // var request = {
-    //   location: center,
-    //   readius: 8047,
-    //   types: ['cafe']
-    // };
-
-    // var service = new google.maps.places.PlacesService(map);
-    // service.nearbySearch(request, callback)
 }
 
-// function callback(results, status) {
-//   if(status == google.maps.places.PlacesServiceStatus.OK){
-//     for(var i=0; i<results.length; i++){
-//       createMarker(results[i]);
-//     }
-//   }
-// }
-
-// function createMarker(place) {
-//   var placeLoc = place.geometry.location;
-//   var cafeMarker = new.google.maps.Marker({
-//     map: map,
-//     position: place.geometry.location
-//   });
-// }
 
 //grabbing submit button
 let submit = document.getElementById('submit')
@@ -67,20 +45,22 @@ function calcRoute() {
       destination: destination,
       travelMode: 'BICYCLING'
     };
-    directionsService.route(request, function(result, status) {
-      console.log(result)
+    directionsService.route(request, computeTotalDistance);
+  }
+  function computeTotalDistance(result, status) {
+    console.log(result)
         let steps = result.routes[0].legs[0].steps
+        let stepsText = ''
         for(let i=0; i<steps.length; i++){
-            directions.innerHTML += [i+1] + ')' + ' ' + steps[i].instructions + `</br>`
+            stepsText += [i+1] + ')' + ' ' + steps[i].instructions + `</br>`
         } 
+        directions.innerHTML = stepsText
       let distance = result.routes[0].legs[0].distance.text
-      miles.innerHTML += ' ' + distance
+      document.getElementById('new_distance').innerHTML = result.routes[0].legs[0].distance.text;
       if (status == 'OK') {
         directionsDisplay.setDirections(result);
       }
-    });
   }
-
 
 //set up autocomplete
 
