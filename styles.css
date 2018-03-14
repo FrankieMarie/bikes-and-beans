@@ -12,6 +12,21 @@ body {
     margin-bottom: 1em;
 }
 
+[type="checkbox"]+label {
+    margin-bottom: 2em;
+    margin-top: 1em;
+    color: #c8ef78;
+}
+
+[type="checkbox"]+label:before, [type="checkbox"]:not(.filled-in)+label:after {
+    border: 2px solid #555555;
+}
+
+[type="checkbox"]:checked+label:before {
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
 .btn {
     background-color: #c8ef78;
     text-transform: lowercase;
@@ -27,11 +42,13 @@ body {
     font-size: 1.2em;
     margin-bottom: 2em;
     margin-top: 2em;
+    color: #ffffff;
 }
 
 i.material-icons {
     font-size: 1.2em;
     margin-right: .2em;
+    color: #ff664b;
 }
 
 #map {
@@ -60,6 +77,6 @@ i.material-icons {
 
 #start:focus + label {color: #c8ef78;} 
 
-.input-field input[type=text] {border-bottom: 1px solid #dddddd;}
+.input-field input[type=text] {border-bottom: 1px solid #555555;}
 
     

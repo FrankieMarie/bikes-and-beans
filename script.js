@@ -16,8 +16,34 @@ function initMap() {
       position: uluru,
       map: map
     }); 
-    directionsDisplay.setMap(map);   
+    directionsDisplay.setMap(map);  
+ 
+//locating cafés
+    // var request = {
+    //   location: center,
+    //   readius: 8047,
+    //   types: ['cafe']
+    // };
+
+    // var service = new google.maps.places.PlacesService(map);
+    // service.nearbySearch(request, callback)
 }
+
+// function callback(results, status) {
+//   if(status == google.maps.places.PlacesServiceStatus.OK){
+//     for(var i=0; i<results.length; i++){
+//       createMarker(results[i]);
+//     }
+//   }
+// }
+
+// function createMarker(place) {
+//   var placeLoc = place.geometry.location;
+//   var cafeMarker = new.google.maps.Marker({
+//     map: map,
+//     position: place.geometry.location
+//   });
+// }
 
 //grabbing submit button
 let submit = document.getElementById('submit')
@@ -42,6 +68,7 @@ function calcRoute() {
       travelMode: 'BICYCLING'
     };
     directionsService.route(request, function(result, status) {
+      console.log(result)
         let steps = result.routes[0].legs[0].steps
         for(let i=0; i<steps.length; i++){
             directions.innerHTML += [i+1] + ')' + ' ' + steps[i].instructions + `</br>`
@@ -53,3 +80,12 @@ function calcRoute() {
       }
     });
   }
+
+
+//set up autocomplete
+
+
+//calculate distance of draggable route
+
+
+//locate cafés and bike shops
