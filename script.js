@@ -1,5 +1,9 @@
 var directionsService;
 var directionsDisplay;
+var routeBoxer;
+var boxpolys;
+var map;
+var distance;
 
 function initMap() {
     directionsService = new google.maps.DirectionsService();
@@ -8,16 +12,20 @@ function initMap() {
       map: map
     });
     var phoenix = {lat: 33.4484, lng: -112.0740};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
       center: phoenix
     });
+
+    routeBoxer = new RouteBoxer();
+
     var marker = new google.maps.Marker({
       position: phoenix,
       map: map
     }); 
+    //calculate distance of draggable route
     directionsDisplay.addListener('directions_changed', function() {
-      computeTotalDistance(directionsDisplay.getDirections());
+      computeTotalDistance(directionsDisplay.getDirections(), "OK");
     });
     directionsDisplay.setMap(map);  
 }
@@ -36,6 +44,7 @@ let directions = document.getElementById('steps')
 let miles = document.getElementById('miles')
 let coffee = document.getElementById('coffee')
 let shop = document.getElementById('shop')
+let hasSearched = false;
 
 function calcRoute() {
     var start = document.getElementById('start').value;
@@ -45,10 +54,12 @@ function calcRoute() {
       destination: destination,
       travelMode: 'BICYCLING'
     };
-    directionsService.route(request, computeTotalDistance);
+    directionsService.route(request, (result, status)=>{
+      directionsDisplay.setDirections(result);      
+    });
   }
   function computeTotalDistance(result, status) {
-    console.log(result)
+    clearBoxes();
         let steps = result.routes[0].legs[0].steps
         let stepsText = ''
         for(let i=0; i<steps.length; i++){
@@ -58,14 +69,40 @@ function calcRoute() {
       let distance = result.routes[0].legs[0].distance.text
       document.getElementById('new_distance').innerHTML = result.routes[0].legs[0].distance.text;
       if (status == 'OK') {
-        directionsDisplay.setDirections(result);
+        var path = result.routes[0].overview_path;
+        var boxes = routeBoxer.box(path, 1);
+        drawBoxes(boxes);
       }
+  }
+  
+  // Draw the array of boxes as polylines on the map
+  function drawBoxes(boxes) {
+    boxpolys = new Array(boxes.length);
+    for (var i = 0; i < boxes.length; i++) {
+      boxpolys[i] = new google.maps.Rectangle({
+        bounds: boxes[i],
+        fillOpacity: 0,
+        strokeOpacity: 1.0,
+        strokeColor: '#FF0000',
+        strokeWeight: 1,
+        map: map
+      });
+    }
+  }
+  
+  // Clear boxes currently on the map
+  function clearBoxes() {
+    if (boxpolys != null) {
+      for (var i = 0; i < boxpolys.length; i++) {
+        boxpolys[i].setMap(null);
+      }
+    }
+    boxpolys = null;
   }
 
 //set up autocomplete
 
 
-//calculate distance of draggable route
 
 
 //locate cafés and bike shops
