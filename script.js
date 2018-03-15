@@ -8,9 +8,6 @@ var service;
 var infoWindow;
 var markers = [];
 
-var cafeCheckbox = document.getElementById('coffee_checkbox');
-var shopsCheckbox = document.getElementById('shops_checkbox');
-
 function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer({
@@ -83,7 +80,10 @@ function calcRoute() {
         drawBoxes(boxes);
       }
   }
-  
+
+  var cafeCheckbox = document.getElementById('coffee_checkbox');
+  var shopsCheckbox = document.getElementById('shops_checkbox'); 
+
   // Draw the array of boxes as polylines on the map
   function drawBoxes(boxes) {
     boxpolys = new Array(boxes.length);
@@ -99,13 +99,23 @@ function calcRoute() {
       });
       //locate cafés and bike shops
       
-      let request = {
-        bounds:boxes[i],
-        type: ['cafe']
-      };
-     // console.log(request)
-      service = new google.maps.places.PlacesService(map);
-      service.nearbySearch(request, callback);
+      if(cafeCheckbox.checked){
+        // let types = cafeCheckbox.checked ^ shopsCheckbox.checked ? (cafeCheckbox.checked ? ['cafe'] : ['bicycle_store']) : ['cafe','bicycle_store']
+        let request = {
+          bounds:boxes[i],
+          types: ['cafe']
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);        
+      }
+      if(shopsCheckbox.checked){
+        let request = {
+          bounds:boxes[i],
+          types: ['bicycle_store']
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);        
+      }
     }
   }
 // function callback (results, status){console.log(results)}
@@ -117,15 +127,15 @@ function calcRoute() {
       }
     }
   }
+  
   function addMarker(place) {
-    console.log(place)
+    console.log('place types:',place.types)
     let iconImg = 'https://developers.google.com/maps/documentation/javascript/images/circle.png'
     if(place.types.includes('cafe')){
-      //set coffee image to iconImg
-      console.log('cafe')
+      iconImg = 'https://developers.google.com/maps/documentation/javascript/images/circle.png'
     }
-    else if(place.types.includes('bikes')){
-      console.log('bike shop')
+    else if(place.types.includes('bicycle_store')){
+      iconImg = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
     }
     var marker = new google.maps.Marker({
       map: map,
