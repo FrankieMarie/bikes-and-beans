@@ -1,6 +1,6 @@
 body {
     background-color:#5271ff;
-    color: white;
+    color: #555555;
 }
 
 .row {
@@ -61,9 +61,12 @@ i.material-icons {
     overflow: scroll;
 }
 
-#steps .flow-text { margin-top: .5em;}
+#steps .flow-text {margin-top: .5em;}
+#steps {color: white;}
 
 .input-field label {color: #c8ef78;}
+
+.input-field input[type=text]{color: white;}
 
 .input-field input[type=text]:focus + label {color: #c8ef78;} 
 
