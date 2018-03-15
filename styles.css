@@ -56,13 +56,18 @@ i.material-icons {
     background-color: #e1e8f0;
 }
 
-#steps {
-    height: 55vh;
-    overflow: scroll;
+ #steps_box .flow-text {
+    color: white;
+    font-size: 1.2em;
 }
 
-#steps .flow-text {margin-top: .5em;}
-#steps {color: white;}
+#steps_box {
+    margin-top: 0em;
+    overflow: scroll;
+    height: 55vh;
+}
+
+#steps_box h1 {margin-top: 0;}
 
 .input-field label {color: #c8ef78;}
 
