@@ -24,10 +24,13 @@ function initMap() {
       map: map
     }); 
     //calculate distance of draggable route
+    
     directionsDisplay.addListener('directions_changed', function() {
       computeTotalDistance(directionsDisplay.getDirections(), "OK");
     });
+
     directionsDisplay.setMap(map);  
+    
 }
 
 
@@ -35,6 +38,9 @@ function initMap() {
 let submit = document.getElementById('submit')
 submit.addEventListener('click', ()=> {
     calcRoute();
+      setTimeout(()=>{
+          calcRoute();
+      }, 100)    
 });
 
 //grabbing directions (steps) div
@@ -44,7 +50,6 @@ let directions = document.getElementById('steps')
 let miles = document.getElementById('miles')
 let coffee = document.getElementById('coffee')
 let shop = document.getElementById('shop')
-let hasSearched = false;
 
 function calcRoute() {
     var start = document.getElementById('start').value;
@@ -77,6 +82,8 @@ function calcRoute() {
   
   // Draw the array of boxes as polylines on the map
   function drawBoxes(boxes) {
+    console.log(boxes);
+    
     boxpolys = new Array(boxes.length);
     for (var i = 0; i < boxes.length; i++) {
       boxpolys[i] = new google.maps.Rectangle({

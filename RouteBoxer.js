@@ -546,7 +546,7 @@ google.maps.LatLng.prototype.rhumbBearingTo = function (dest) {
   }
   return Math.atan2(dLon, dPhi).toBrng();
 };
-}, 5000);
+}, 0);
 /**
  * Extend the Number object to convert degrees to radians
  *
